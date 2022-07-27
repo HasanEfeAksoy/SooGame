@@ -16,12 +16,24 @@ public class SooGame extends JPanel {
 
     JFrame frame;
     long gameLoopDelayWithMilliSeconds = 10;
+    private boolean isQuited = false;
 
     /*
      *
      * start
      *
      * */
+
+    public static void print(String string) {
+        System.out.print(string);
+    }
+    public static void println(String string) {
+        System.out.println(string);
+    }
+    public static void quit() {
+        System.exit(0);
+    }
+
 
 
 
@@ -61,7 +73,6 @@ public class SooGame extends JPanel {
             }
         }
     }
-
 
     public static class Text extends GameObject {
         private String text = "";
@@ -200,6 +211,7 @@ public class SooGame extends JPanel {
     }
 
     SooGame() {
+        println("\n********** SooGame **********\n*\thttps://github.com/HasanEfeAksoy/SooGame\n*\n*\n*Your Project is starting...\n*..\n*.\n********** SooGame **********");
         frame = new JFrame("Window");
         frame.add(this);
         frame.setSize(400, 400);
