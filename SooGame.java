@@ -62,6 +62,48 @@ public class SooGame extends JPanel {
         }
     }
 
+
+    public static class Text extends GameObject {
+        private String text = "";
+        private Font font = new Font("Arial", Font.PLAIN, 10);
+        private Color color = Color.BLACK;
+        Text(String text, Font font, Color color, Vector position) {
+            this.text = text;
+            this.font = font;
+            this.color = color;
+            this.setPosition(position);
+        }
+        Text(String text, Vector position) {
+            this.text = text;
+            this.setPosition(position);
+        }
+        public String getText() {
+            return text;
+        }
+        public void setText(String text) {
+            this.text = text;
+        }
+        public Font getFont() {
+            return font;
+        }
+        public void setFont(Font font) {
+            this.font = font;
+        }
+        public Color getColor() {
+            return color;
+        }
+        public void setColor(Color color) {
+            this.color = color;
+        }
+
+        @Override
+        public void update(Graphics2D g2d) {
+            super.update(g2d);
+            g2d.setFont(this.font);
+            g2d.setColor(this.color);
+            g2d.drawString(this.text, this.getPosition().getX(), this.getPosition().getY());
+        }
+    }
     public static class Vector {
         private float x = 0.0f;
         private float y = 0.0f;

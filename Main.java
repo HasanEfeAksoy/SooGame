@@ -23,6 +23,7 @@ class Player extends SooGame.GameObject {
 public class Main extends SooGame {
 
     Player player;
+    Text text;
 
     // START METHOD RUN ONES
     @Override
@@ -31,6 +32,8 @@ public class Main extends SooGame {
 
         // FIRST YOU MUST WRITE HERE FOR DEFINE SOOGAME VARAIBLES
         player = new Player(new SooGame.Vector(50.0f, 50.0f, 0.0f), new SooGame.Vector(30.0f, 30.0f, 1.0f));
+        text = new Text("HELLO WORLD", new Vector(50.0f, 50.0f, 0.0f));
+        text.addPhysics(new Physics());
     }
 
     // UPDATE METHOD RUN EVERYTIME FOR DRAWING ANYTHINGS
@@ -40,6 +43,7 @@ public class Main extends SooGame {
         super.update(g2d);
 
         player.update(g2d);
+        text.update(g2d);
     }
 
     public static void main(String[] args) {
