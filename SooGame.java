@@ -15,7 +15,7 @@ import java.awt.*;
 public class SooGame extends JPanel {
 
     JFrame frame;
-    long gameLoopDelayWithMiliSeconds = 10;
+    long gameLoopDelayWithMilliSeconds = 10;
 
     /*
      *
@@ -150,7 +150,7 @@ public class SooGame extends JPanel {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        //draw in here (draw) + (update)
+        //draw in here (draw()) + (update)
         update(g2d);
     }
 
@@ -159,15 +159,15 @@ public class SooGame extends JPanel {
         frame.add(this);
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // first (start)
+        // first (start())
         start();
         frame.setVisible(true);
 
         while (true) {
-            // draw in here (update)
+            // draw in here (update())
             display(); // (repaint)
             try {
-                Thread.sleep(gameLoopDelayWithMiliSeconds);
+                Thread.sleep(gameLoopDelayWithMilliSeconds);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
