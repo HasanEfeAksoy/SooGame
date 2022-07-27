@@ -1,5 +1,5 @@
 # SooGame
-SooGame Java Class
+SooGame Basic Java Class Game Engine by Hasan Efe Aksoy.
 
 <center><h1><b>SooGame Java Game Engine Class</b></h1></center>
 <br>
