@@ -8,7 +8,8 @@ SooGame Java Class
 <br>
 <ul>
   <li><h4>GameObject system</h4></li>
-  <li><h4>Vectors and Gravity</h4></li>
+  <li><h4>Components</h4></li>
+  <li><h4>Functions</h4></li>
   <li><h4>Swing/Awt draw mechanics</h4></li>
   <li><h4>SooGame Game Engine Foundation (using Java JFrame)</h4></li>
 </ul>
