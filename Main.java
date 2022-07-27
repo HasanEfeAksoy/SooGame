@@ -7,12 +7,14 @@ class Player extends SooGame.GameObject {
         this.setScale(sca);
         this.addPhysics(new SooGame.Physics());
     }
-    void show(Graphics2D g2d) {
-        g2d.fillOval((int)this.getPosition().getX(), (int)this.getPosition().getY(), (int)this.getScale().getX(), (int)this.getScale().getY());
-    }
+
+    // GAMEOBJECTS HAVE UPDATE FUNCION
+    // YOU SHOULD WRITE IT IN THE YOUR MAIN UPDATE FUNCTION
     @Override
-    public void writeInUpdate() {
-        super.writeInUpdate();
+    public void update(Graphics2D g2d) {
+        super.update(g2d);
+
+        g2d.fillOval((int)this.getPosition().getX(), (int)this.getPosition().getY(), (int)this.getScale().getX(), (int)this.getScale().getY());
         this.setPosition(new SooGame.Vector(this.getPosition().getX() + 3.0f, this.getPosition().getY(), this.getPosition().getZ()));
     }
 }
@@ -27,7 +29,7 @@ public class Main extends SooGame {
     public void start() {
         super.start();
 
-        // YOU MUST WRITE HERE
+        // FIRST YOU MUST WRITE HERE FOR DEFINE SOOGAME VARAIBLES
         player = new Player(new SooGame.Vector(50.0f, 50.0f, 0.0f), new SooGame.Vector(30.0f, 30.0f, 1.0f));
     }
 
@@ -37,8 +39,7 @@ public class Main extends SooGame {
     public void update(Graphics2D g2d) {
         super.update(g2d);
 
-        player.show(g2d);
-        player.writeInUpdate();
+        player.update(g2d);
     }
 
     public static void main(String[] args) {
