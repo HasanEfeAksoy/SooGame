@@ -59,7 +59,6 @@ public class SooGame extends JPanel {
         }
     }
 
-
     public static class Vector {
         private float x = 0.0f;
         private float y = 0.0f;
@@ -140,10 +139,7 @@ public class SooGame extends JPanel {
     public void start() {
         //overrided
     }
-    public void update() {
-        //overrided
-    }
-    public void draw(Graphics2D g2d) {
+    public void update(Graphics2D g2d) {
         //overrided
     }
     private void display() {
@@ -154,8 +150,8 @@ public class SooGame extends JPanel {
         super.paint(g);
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        //draw in here
-        draw(g2d);
+        //draw in here (draw) + (update)
+        update(g2d);
     }
 
     SooGame() {
@@ -163,14 +159,13 @@ public class SooGame extends JPanel {
         frame.add(this);
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // first
+        // first (start)
         start();
         frame.setVisible(true);
 
         while (true) {
-            // draw in here
-            update();
-            display();
+            // draw in here (update)
+            display(); // (repaint)
             try {
                 Thread.sleep(gameLoopDelayWithMiliSeconds);
             } catch (InterruptedException e) {

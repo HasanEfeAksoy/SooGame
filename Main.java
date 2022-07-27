@@ -23,21 +23,14 @@ public class Main extends SooGame {
         player = new Player(new SooGame.Vector(50.0f, 50.0f, 0.0f), new SooGame.Vector(30.0f, 30.0f, 1.0f));
     }
 
-    // UPDATE METHOD RUN EVERYTIME (DEFAULT 10 MILISECOND DELAY)
-    @Override
-    public void update() {
-        super.update();
-
-        // YOU MUST WRITE HERE
-        player.setPosition(new Vector(player.getPosition().getX() + 3.0f, player.getPosition().getY(), player.getPosition().getZ()));
-        player.writeInUpdate();
-    }
-
-    // DRAW METHOD RUN EVERYTIME FOR DRAWING ANYTHINGS
+    // UPDATE METHOD RUN EVERYTIME FOR DRAWING ANYTHINGS
     // IT USING AWT DRAW TOOLS
     @Override
-    public void draw(Graphics2D g2d) {
-        super.draw(g2d);
+    public void update(Graphics2D g2d) {
+        super.update(g2d);
+
+        player.setPosition(new Vector(player.getPosition().getX() + 3.0f, player.getPosition().getY(), player.getPosition().getZ()));
+        player.writeInUpdate();
 
         g2d.fillOval((int)player.getPosition().getX(), (int)player.getPosition().getY(), (int)player.getScale().getX(), (int)player.getScale().getY());
     }
