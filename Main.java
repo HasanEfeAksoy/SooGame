@@ -7,6 +7,14 @@ class Player extends SooGame.GameObject {
         this.setScale(sca);
         this.addPhysics(new SooGame.Physics());
     }
+    void show(Graphics2D g2d) {
+        g2d.fillOval((int)this.getPosition().getX(), (int)this.getPosition().getY(), (int)this.getScale().getX(), (int)this.getScale().getY());
+    }
+    @Override
+    public void writeInUpdate() {
+        super.writeInUpdate();
+        this.setPosition(new SooGame.Vector(this.getPosition().getX() + 3.0f, this.getPosition().getY(), this.getPosition().getZ()));
+    }
 }
 
 // EXTENDS SOOGAME
@@ -29,10 +37,8 @@ public class Main extends SooGame {
     public void update(Graphics2D g2d) {
         super.update(g2d);
 
-        player.setPosition(new Vector(player.getPosition().getX() + 3.0f, player.getPosition().getY(), player.getPosition().getZ()));
+        player.show(g2d);
         player.writeInUpdate();
-
-        g2d.fillOval((int)player.getPosition().getX(), (int)player.getPosition().getY(), (int)player.getScale().getX(), (int)player.getScale().getY());
     }
 
     public static void main(String[] args) {

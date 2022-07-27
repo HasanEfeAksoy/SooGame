@@ -55,7 +55,9 @@ public class SooGame extends JPanel {
             this.physics = null;
         }
         public void writeInUpdate() {
-            this.physics.enablePhysics(this);
+            if (this.physics != null) {
+                this.physics.enablePhysics(this);
+            }
         }
     }
 
