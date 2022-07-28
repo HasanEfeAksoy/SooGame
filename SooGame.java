@@ -11,13 +11,17 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 
 public class SooGame extends JPanel {
 
     JFrame frame;
     long gameLoopDelayWithMilliSeconds = 10;
-    private boolean isQuited = false;
 
     /*
      *
@@ -31,11 +35,161 @@ public class SooGame extends JPanel {
     public static void println(String string) {
         System.out.println(string);
     }
+    public String getInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
     public static void quit() {
         System.exit(0);
     }
 
+    /*
+    * fun start
+    * */
 
+    public double square(double number) {
+        return (double) (number * number);
+    }
+    public double toThePowerOf(double down, int up) {
+        double result = 1.0;
+        if (up < 0) {
+            System.out.println("*up value can not less than 0");
+        }
+        else {
+            for (int i = 1; i <= up; i++)
+            {
+                result = result * down;
+            }
+        }
+        return result;
+    }
+    public double distance(double x1, double y1, double x2, double y2) {
+        double bound1 = Math.abs((double)x1 - (double)x2);
+        double bound2 = Math.abs((double)y1 - (double)y2);
+        double dist = Math.sqrt(((double)bound1 * (double)bound1) + ((double)bound2 * (double)bound2));
+        return dist;
+    }
+    public double areaRect(double length, double height) {
+        return (double)(length * height);
+    }
+    public double areaTri(double length, double height) {
+        return (double)((length * height) / 2);
+    }
+
+    public File file(String path) {
+        return new File(path);
+    }
+    public File createFile(String path) {
+        File file = new File(path);
+        try {
+            if (file.createNewFile()) System.out.println();
+            else System.out.println("*Already Exist " + file.getName());
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        return file;
+    }
+    public File createFileAgain(String path) {
+        File file = new File(path);
+        try {
+            file.createNewFile();
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        return file;
+    }
+    public void writeFileContinue(File file, String text) {
+        File myFile = new File(file.getPath());
+        if (myFile.exists()) {
+            Scanner scanner = null;
+            String data = "";
+            try {
+                scanner = new Scanner(myFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            while (scanner.hasNextLine()) {
+                data += scanner.nextLine();
+                data += "\n";
+            }
+            scanner.close();
+
+            try {
+                FileWriter fileWriter = new FileWriter(file);
+                fileWriter.write(data + text);
+                fileWriter.close();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        }
+        else {
+            System.out.println("*File is not exist");
+        }
+    }
+    public void writeFileAgain(File file, String text) {
+        File myFile = new File(file.getPath());
+        if (myFile.exists()) {
+            try {
+                FileWriter fileWriter = new FileWriter(myFile);
+                fileWriter.write(text);
+                fileWriter.close();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        }
+        else {
+            System.out.println("*File is not exist");
+        }
+    }
+    public String readFileAll(File file) {
+        File myFile = new File(file.getPath());
+        String data = "";
+        if (myFile.exists()) {
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(myFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            while (scanner.hasNextLine()) {
+                data += scanner.nextLine();
+                data += "\n";
+            }
+            scanner.close();
+        }
+        else {
+            data = "";
+            System.out.println("*File is not exist");
+        }
+
+        return data;
+    }
+    public String readFileAllWithoutEnter(File file) {
+        File myFile = new File(file.getPath());
+        String data = "";
+        if (myFile.exists()) {
+            Scanner scanner = null;
+            try {
+                scanner = new Scanner(myFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            while (scanner.hasNextLine()) {
+                data += scanner.nextLine();
+            }
+            scanner.close();
+        }
+        else {
+            data = "";
+            System.out.println("*File is not exist");
+        }
+
+        return data;
+    }
+
+    /*
+    * fun end
+    * */
 
 
     public static class GameObject {
@@ -253,6 +407,7 @@ public class SooGame extends JPanel {
      * end
      *
      * */
+
 
     public void start() {
         //overrided
