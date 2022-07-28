@@ -433,6 +433,7 @@ public class SooGame extends JPanel {
         frame.add(this);
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         // first (start())
         start();
         frame.setVisible(true);
