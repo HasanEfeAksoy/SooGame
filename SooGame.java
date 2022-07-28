@@ -35,7 +35,7 @@ public class SooGame extends JPanel {
     public static void println(String string) {
         System.out.println(string);
     }
-    public String getInput() {
+    public static String getInput() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
@@ -47,10 +47,10 @@ public class SooGame extends JPanel {
     * fun start
     * */
 
-    public double square(double number) {
+    public static double square(double number) {
         return (double) (number * number);
     }
-    public double toThePowerOf(double down, int up) {
+    public static double toThePowerOf(double down, int up) {
         double result = 1.0;
         if (up < 0) {
             System.out.println("*up value can not less than 0");
@@ -63,23 +63,23 @@ public class SooGame extends JPanel {
         }
         return result;
     }
-    public double distance(double x1, double y1, double x2, double y2) {
+    public static double distance(double x1, double y1, double x2, double y2) {
         double bound1 = Math.abs((double)x1 - (double)x2);
         double bound2 = Math.abs((double)y1 - (double)y2);
         double dist = Math.sqrt(((double)bound1 * (double)bound1) + ((double)bound2 * (double)bound2));
         return dist;
     }
-    public double areaRect(double length, double height) {
+    public static double areaRect(double length, double height) {
         return (double)(length * height);
     }
-    public double areaTri(double length, double height) {
+    public static double areaTri(double length, double height) {
         return (double)((length * height) / 2);
     }
 
-    public File file(String path) {
+    public static File file(String path) {
         return new File(path);
     }
-    public File createFile(String path) {
+    public static File createFile(String path) {
         File file = new File(path);
         try {
             if (file.createNewFile()) System.out.println();
@@ -89,7 +89,7 @@ public class SooGame extends JPanel {
         }
         return file;
     }
-    public File createFileAgain(String path) {
+    public static File createFileAgain(String path) {
         File file = new File(path);
         try {
             file.createNewFile();
@@ -98,7 +98,7 @@ public class SooGame extends JPanel {
         }
         return file;
     }
-    public void writeFileContinue(File file, String text) {
+    public static void writeFileContinue(File file, String text) {
         File myFile = new File(file.getPath());
         if (myFile.exists()) {
             Scanner scanner = null;
@@ -126,7 +126,7 @@ public class SooGame extends JPanel {
             System.out.println("*File is not exist");
         }
     }
-    public void writeFileAgain(File file, String text) {
+    public static void writeFileAgain(File file, String text) {
         File myFile = new File(file.getPath());
         if (myFile.exists()) {
             try {
@@ -141,7 +141,7 @@ public class SooGame extends JPanel {
             System.out.println("*File is not exist");
         }
     }
-    public String readFileAll(File file) {
+    public static String readFileAll(File file) {
         File myFile = new File(file.getPath());
         String data = "";
         if (myFile.exists()) {
@@ -164,7 +164,7 @@ public class SooGame extends JPanel {
 
         return data;
     }
-    public String readFileAllWithoutEnter(File file) {
+    public static String readFileAllWithoutEnter(File file) {
         File myFile = new File(file.getPath());
         String data = "";
         if (myFile.exists()) {
