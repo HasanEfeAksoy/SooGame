@@ -10,6 +10,7 @@
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 
 
 public class SooGame extends JPanel {
@@ -78,10 +79,12 @@ public class SooGame extends JPanel {
         private String text = "";
         private Font font = new Font("Arial", Font.PLAIN, 10);
         private Color color = Color.BLACK;
-        Text(String text, Font font, Color color, Vector position) {
+        private boolean isFill = true;
+        Text(String text, Font font, Color color, Vector position, boolean isFill) {
             this.text = text;
             this.font = font;
             this.color = color;
+            this.isFill = isFill;
             this.setPosition(position);
         }
         Text(String text, Vector position) {
@@ -107,6 +110,7 @@ public class SooGame extends JPanel {
             this.color = color;
         }
 
+
         @Override
         public void update(Graphics2D g2d) {
             super.update(g2d);
@@ -115,6 +119,64 @@ public class SooGame extends JPanel {
             g2d.drawString(this.text, this.getPosition().getX(), this.getPosition().getY());
         }
     }
+    public static class Square extends GameObject {
+        private Color color = Color.BLACK;
+        private boolean isFill = true;
+        Square(Vector position, Vector scale, Color color, boolean isFill) {
+            this.setPosition(position);
+            this.setScale(scale);
+            this.color = color;
+            this.isFill = isFill;
+        }
+        Square(Vector position, Vector scale) {
+        }
+        public boolean getIsFill() {
+            return isFill;
+        }
+        public void setIsFill(boolean fill) {
+            isFill = fill;
+        }
+
+        @Override
+        public void update(Graphics2D g2d) {
+            super.update(g2d);
+
+            g2d.setColor(this.color);
+            Rectangle rect2 = new Rectangle((int)this.getPosition().getX(), (int)this.getPosition().y, (int)this.getScale().x, (int)this.getScale().y);
+            if (isFill) {
+                g2d.fill(rect2);
+            }
+            g2d.draw(rect2);
+        }
+    }
+    public static class Ellipse extends GameObject {
+        private Color color = Color.BLACK;
+        private boolean isFill = true;
+        Ellipse(Vector position, Vector scale, Color color, boolean isFill) {
+            this.setPosition(position);
+            this.setScale(scale);
+            this.color = color;
+            this.isFill = isFill;
+        }
+        Ellipse(Vector position, Vector scale) {
+            this.setPosition(position);
+            this.setScale(scale);
+        }
+
+        @Override
+        public void update(Graphics2D g2d) {
+            super.update(g2d);
+
+            g2d.setColor(this.color);
+            Ellipse2D ellipse2D = new Ellipse2D.Float();
+            ellipse2D.setFrame(new Rectangle((int)this.getPosition().getX(), (int)this.getPosition().y, (int)this.getScale().x, (int)this.getScale().y));
+            if (isFill) {
+                g2d.fill(ellipse2D);
+            }
+            g2d.draw(ellipse2D);
+        }
+    }
+
     public static class Vector {
         private float x = 0.0f;
         private float y = 0.0f;

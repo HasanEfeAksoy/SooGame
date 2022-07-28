@@ -2,6 +2,9 @@ import java.awt.*;
 
 // YOU CAN CREATE YOUR CLASSES EXTENDS BY GAMEOBJECT
 class Player extends SooGame.GameObject {
+
+    SooGame.Ellipse ellipse;
+
     Player(SooGame.Vector pos, SooGame.Vector sca) {
         this.setPosition(pos);
         this.setScale(sca);
@@ -14,7 +17,9 @@ class Player extends SooGame.GameObject {
     public void update(Graphics2D g2d) {
         super.update(g2d);
 
-        g2d.fillOval((int)this.getPosition().getX(), (int)this.getPosition().getY(), (int)this.getScale().getX(), (int)this.getScale().getY());
+        ellipse = new SooGame.Ellipse(new SooGame.Vector(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ()), new SooGame.Vector(this.getScale().getX(), this.getScale().getY(), this.getScale().getZ()));
+        ellipse.update(g2d);
+
         this.setPosition(new SooGame.Vector(this.getPosition().getX() + 3.0f, this.getPosition().getY(), this.getPosition().getZ()));
     }
 }
@@ -24,6 +29,8 @@ public class Main extends SooGame {
 
     Player player;
     Text text;
+    Square square;
+    Ellipse ellipse;
 
     // START METHOD RUN ONES
     @Override
@@ -32,8 +39,12 @@ public class Main extends SooGame {
 
         // FIRST YOU MUST WRITE HERE FOR DEFINE SOOGAME VARAIBLES
         player = new Player(new SooGame.Vector(50.0f, 50.0f, 0.0f), new SooGame.Vector(30.0f, 30.0f, 1.0f));
+
         text = new Text("HELLO WORLD", new Vector(50.0f, 50.0f, 0.0f));
         text.addPhysics(new Physics());
+
+        square = new Square(new Vector(200.0f, 20.0f, 1.0f), new Vector(10.0f, 10.0f, 1.0f), Color.RED, false);
+        ellipse = new Ellipse(new Vector(200.0f, 40.0f, 1.0f), new Vector(20.0f, 20.0f, 1.0f), Color.BLUE, true);
     }
 
     // UPDATE METHOD RUN EVERYTIME FOR DRAWING ANYTHINGS
@@ -44,6 +55,8 @@ public class Main extends SooGame {
 
         player.update(g2d);
         text.update(g2d);
+        square.update(g2d);
+        ellipse.update(g2d);
     }
 
     public static void main(String[] args) {
