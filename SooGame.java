@@ -63,17 +63,23 @@ public class SooGame extends JPanel {
         }
         return result;
     }
+    public static double areaRect(double length, double height) {
+        return (double)(length * height);
+    }
+    public static double areaTri(double length, double height) {
+        return (double)((length * height) / 2);
+    }
     public static double distance(double x1, double y1, double x2, double y2) {
         double bound1 = Math.abs((double)x1 - (double)x2);
         double bound2 = Math.abs((double)y1 - (double)y2);
         double dist = Math.sqrt(((double)bound1 * (double)bound1) + ((double)bound2 * (double)bound2));
         return dist;
     }
-    public static double areaRect(double length, double height) {
-        return (double)(length * height);
-    }
-    public static double areaTri(double length, double height) {
-        return (double)((length * height) / 2);
+    public static Vector follow(Vector follower, Vector target, float delay) {
+        follower.setX(follower.getX() + (target.getX() - follower.getX()) / delay);
+        follower.setY(follower.getY() + (target.getY() - follower.getY()) / delay);
+        follower.setZ(follower.getZ() + (target.getZ() - follower.getZ()) / delay);
+        return follower;
     }
 
     public static File file(String path) {

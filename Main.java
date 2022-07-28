@@ -40,6 +40,7 @@ public class Main extends SooGame {
         // FIRST YOU MUST WRITE HERE FOR DEFINE SOOGAME VARAIBLES
         player = new Player(new SooGame.Vector(50.0f, 50.0f, 0.0f), new SooGame.Vector(30.0f, 30.0f, 1.0f));
 
+
         text = new Text("HELLO WORLD", new Vector(50.0f, 50.0f, 0.0f));
         text.addPhysics(new Physics());
 
