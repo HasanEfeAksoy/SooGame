@@ -15,6 +15,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -362,22 +364,22 @@ public class SooGame extends JPanel {
     }
 
     static class Input implements KeyListener {
-        private boolean[] pressed;
-        private boolean[] released;
+        private boolean[] keyPressed;
+        private boolean[] keyReleased;
         public boolean isPressed(int keyCode) {
-            return pressed[keyCode];
+            return keyPressed[keyCode];
         }
         public boolean isReleased(int keyCode) {
-            return released[keyCode];
+            return keyReleased[keyCode];
         }
         public Input() {
-            pressed = new boolean[255];
-            released = new boolean[255];
+            keyPressed = new boolean[255];
+            keyReleased = new boolean[255];
         }
         @Override
         public void keyPressed(KeyEvent e) {
-            pressed[e.getKeyCode()] = true;
-            released[e.getKeyCode()] = false;
+            keyPressed[e.getKeyCode()] = true;
+            keyReleased[e.getKeyCode()] = false;
         }
         @Override
         public void keyTyped(KeyEvent e) {
@@ -385,12 +387,12 @@ public class SooGame extends JPanel {
         }
         @Override
         public void keyReleased(KeyEvent e) {
-            pressed[e.getKeyCode()] = false;
-            released[e.getKeyCode()] = true;
+            keyPressed[e.getKeyCode()] = false;
+            keyReleased[e.getKeyCode()] = true;
         }
 
         private void restart() {
-            Arrays.fill(released, false);
+            Arrays.fill(keyReleased, false);
         }
     }
     public static class Vector {
