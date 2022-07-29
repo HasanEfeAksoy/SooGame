@@ -46,6 +46,7 @@ public class Main extends SooGame {
 
         square = new Square(new Vector(200.0f, 20.0f, 1.0f), new Vector(10.0f, 10.0f, 1.0f), Color.RED, false);
         ellipse = new Ellipse(new Vector(200.0f, 40.0f, 1.0f), new Vector(20.0f, 20.0f, 1.0f), Color.BLUE, true);
+
     }
 
     // UPDATE METHOD RUN EVERYTIME FOR DRAWING ANYTHINGS

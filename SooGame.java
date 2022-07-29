@@ -8,6 +8,10 @@
  * */
 
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -15,7 +19,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
+
 
 
 public class SooGame extends JPanel {
@@ -404,6 +410,27 @@ public class SooGame extends JPanel {
             velocity.mult(new Vector(mass, mass, mass));
             velocity.mult(new Vector(0.99f, 0.99f, 0.99f));
             gameObject.position.add(velocity);
+        }
+    }
+    public static class Sound {
+        Clip clip = null;
+        AudioInputStream ais = null;
+        File f = null;
+        public Sound (String soundUrl) {
+            try {
+                f = new File(soundUrl);
+                ais = AudioSystem.getAudioInputStream(f.toURI().toURL());
+                this.clip = AudioSystem.getClip();
+                this.clip.open(this.ais);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        public void play() {
+            this.clip.start();
+        }
+        public void stop() {
+            this.clip.stop();
         }
     }
 
