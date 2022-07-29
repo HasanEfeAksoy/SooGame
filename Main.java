@@ -31,7 +31,6 @@ public class Main extends SooGame {
     Text text;
     Square square;
     Ellipse ellipse;
-    Photo photo;
 
     // START METHOD RUN ONES
     @Override
@@ -47,8 +46,6 @@ public class Main extends SooGame {
         square = new Square(new Vector(200.0f, 20.0f, 1.0f), new Vector(10.0f, 10.0f, 1.0f), Color.RED, false);
         ellipse = new Ellipse(new Vector(200.0f, 40.0f, 1.0f), new Vector(20.0f, 20.0f, 1.0f), Color.BLUE, true);
 
-        photo = new Photo(new Vector(00.0f, 100.0f, 1.0f), new Vector(120.0f, 100.0f, 1.0f), "D:\\Klasörüm\\Benim Dosyalar\\Photos\\mozart.jpg");
-        photo.addPhysics(new Physics());
     }
 
     // UPDATE METHOD RUN EVERYTIME FOR DRAWING ANYTHINGS
@@ -61,7 +58,6 @@ public class Main extends SooGame {
         text.update(g2d);
         square.update(g2d);
         ellipse.update(g2d);
-        photo.update(g2d);
 
     }
 
