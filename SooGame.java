@@ -11,7 +11,6 @@
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
@@ -19,14 +18,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Scanner;
 
 
 
 public class SooGame extends JPanel {
 
-    JFrame frame;
+    static JFrame frame;
     long gameLoopDelayWithMilliSeconds = 10;
 
     /*
@@ -285,6 +283,22 @@ public class SooGame extends JPanel {
             g2d.drawString(this.text, this.getPosition().getX(), this.getPosition().getY());
         }
     }
+    public static class Photo extends GameObject {
+        private ImageIcon imageIcon;
+        Photo(Vector position, Vector scale, String imagePath) {
+            this.setPosition(position);
+            this.setScale(scale);
+            ImageIcon oldImageIcon = new ImageIcon(imagePath);
+            Image oldImage = oldImageIcon.getImage();
+            Image image = oldImage.getScaledInstance((int)this.getScale().getX(), (int)this.getScale().getY(),  java.awt.Image.SCALE_SMOOTH);
+            imageIcon = new ImageIcon(image);
+        }
+        @Override
+        public void update(Graphics2D g2d) {
+            super.update(g2d);
+            g2d.drawImage(imageIcon.getImage(), (int)this.getPosition().getX(), (int)this.getPosition().getY(), null);
+        }
+    }
     public static class Square extends GameObject {
         private Color color = Color.BLACK;
         private boolean isFill = true;
@@ -431,6 +445,12 @@ public class SooGame extends JPanel {
         }
         public void stop() {
             this.clip.stop();
+        }
+    }
+
+    public static class ParticleSystem {
+        ParticleSystem() {
+            // underdevolopment
         }
     }
 
