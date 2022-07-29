@@ -448,11 +448,7 @@ public class SooGame extends JPanel {
         }
     }
 
-    public static class ParticleSystem {
-        ParticleSystem() {
-            // underdevolopment
-        }
-    }
+
 
 
     /*
