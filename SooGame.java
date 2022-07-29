@@ -13,11 +13,14 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 
@@ -25,6 +28,7 @@ import java.util.Scanner;
 public class SooGame extends JPanel {
 
     static JFrame frame;
+    public static Input input;
     long gameLoopDelayWithMilliSeconds = 10;
 
     /*
@@ -234,7 +238,7 @@ public class SooGame extends JPanel {
 
         public void update(Graphics2D g2d) {
             if (this.physics != null) {
-                this.physics.enablePhysics(this);
+                this.physics.doPhysics(this);
             }
         }
     }
@@ -357,6 +361,38 @@ public class SooGame extends JPanel {
         }
     }
 
+    static class Input implements KeyListener {
+        private boolean[] pressed;
+        private boolean[] released;
+        public boolean isPressed(int keyCode) {
+            return pressed[keyCode];
+        }
+        public boolean isReleased(int keyCode) {
+            return released[keyCode];
+        }
+        public Input() {
+            pressed = new boolean[255];
+            released = new boolean[255];
+        }
+        @Override
+        public void keyPressed(KeyEvent e) {
+            pressed[e.getKeyCode()] = true;
+            released[e.getKeyCode()] = false;
+        }
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+        @Override
+        public void keyReleased(KeyEvent e) {
+            pressed[e.getKeyCode()] = false;
+            released[e.getKeyCode()] = true;
+        }
+
+        private void restart() {
+            Arrays.fill(released, false);
+        }
+    }
     public static class Vector {
         private float x = 0.0f;
         private float y = 0.0f;
@@ -408,22 +444,46 @@ public class SooGame extends JPanel {
         }
     }
     public static class Physics {
-        Vector gravity = new Vector(0.0f, 0.1f, 0.0f);
-        Vector velocity = new Vector(0.0f, 0.0f, 0.0f);
-        float mass = 1f;
-
+        private Vector g = new Vector(0.0f, 0.0f, 0.0f);
+        private Vector gravity = new Vector(0.0f, 0.1f, 0.0f);
+        private Vector velocity = new Vector(0.0f, 0.0f, 0.0f);
+        private float mass = 1f;
         Physics(Vector gravity, float mass) {
             this.gravity = gravity;
             this.mass = mass;
         }
         Physics() {
         }
-
-        public void enablePhysics(GameObject gameObject) {
+        public Vector getGravity() {
+            return gravity;
+        }
+        public void setGravity(Vector gravity) {
+            this.gravity = gravity;
+        }
+        public Vector getVelocity() {
+            return velocity;
+        }
+        public void setVelocity(Vector velocity) {
+            this.velocity = velocity;
+        }
+        public float getMass() {
+            return mass;
+        }
+        public void setMass(float mass) {
+            this.mass = mass;
+        }
+        private void doPhysics(GameObject gameObject) {
             velocity.add(gravity);
+            velocity.add(g);
             velocity.mult(new Vector(mass, mass, mass));
             velocity.mult(new Vector(0.99f, 0.99f, 0.99f));
             gameObject.position.add(velocity);
+            g = new Vector(0.0f, 0.0f, 0.0f);
+        }
+        public void addForce(Vector direction) {
+            g.setX(direction.getX());
+            g.setY(direction.getY());
+            g.setZ(direction.getZ());
         }
     }
     public static class Sound {
@@ -458,6 +518,7 @@ public class SooGame extends JPanel {
      * */
 
 
+
     public void start() {
         //overrided
     }
@@ -474,6 +535,7 @@ public class SooGame extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         //draw in here (draw()) + (update)
         update(g2d);
+        input.restart();
     }
 
     SooGame() {
@@ -483,6 +545,8 @@ public class SooGame extends JPanel {
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
+        input = new Input();
+        frame.addKeyListener(input);
         // first (start())
         start();
         frame.setVisible(true);
