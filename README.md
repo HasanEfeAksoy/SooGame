@@ -11,7 +11,8 @@ SooGame Basic Java Class Game Engine by Hasan Efe Aksoy.
 <ul>
   <li><h4>GameObject system</h4></li>
   <li><h4>Components</h4></li>
-  <li><h4>Functions</h4></li>
+  <li><h4>Helpfuly Functions</h4></li>
+  <li><h4>Basic Key/Mouse Input System</h4></li>
   <li><h4>Swing/Awt draw mechanics</h4></li>
   <li><h4>SooGame Game Engine Foundation (using Java JFrame)</h4></li>
 </ul>
