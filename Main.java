@@ -59,7 +59,7 @@ public class Main extends SooGame {
         square.update(g2d);
         ellipse.update(g2d);
 
-        if (/*SooGame.*/input.isReleased(KeyEvent.VK_UP)) {
+        if (/*SooGame.*/input.isKeyReleased(KeyEvent.VK_UP)) {
             println("Key Released");
         }
     }

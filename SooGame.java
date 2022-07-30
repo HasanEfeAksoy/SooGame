@@ -363,18 +363,39 @@ public class SooGame extends JPanel {
         }
     }
 
-    static class Input implements KeyListener {
+    static class Input implements KeyListener, MouseListener {
         private boolean[] keyPressed;
         private boolean[] keyReleased;
-        public boolean isPressed(int keyCode) {
+        private boolean mousePressed;
+        private boolean mouseReleased;
+        private boolean mouseClicked;
+        public boolean isKeyPressed(int keyCode) {
             return keyPressed[keyCode];
         }
-        public boolean isReleased(int keyCode) {
+        public boolean isKeyReleased(int keyCode) {
             return keyReleased[keyCode];
         }
+        public boolean isMousePressed() {
+            return mousePressed;
+        }
+        public boolean isMouseReleased() {
+            return mouseReleased;
+        }
+        public boolean isMouseClicked() {
+            return mouseClicked;
+        }
+        private void restart() {
+            Arrays.fill(keyReleased, false);
+            mouseReleased = false;
+            mouseClicked = false;
+        }
+
         public Input() {
             keyPressed = new boolean[255];
             keyReleased = new boolean[255];
+            mousePressed = false;
+            mouseReleased = false;
+            mouseClicked = false;
         }
         @Override
         public void keyPressed(KeyEvent e) {
@@ -391,8 +412,34 @@ public class SooGame extends JPanel {
             keyReleased[e.getKeyCode()] = true;
         }
 
-        private void restart() {
-            Arrays.fill(keyReleased, false);
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            mousePressed = false;
+            mouseReleased = false;
+            mouseClicked = true;
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            mousePressed = true;
+            mouseReleased = false;
+            mouseClicked = false;
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            mousePressed = false;
+            mouseReleased = true;
+            mouseClicked = false;
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
         }
     }
     public static class Vector {
@@ -549,6 +596,7 @@ public class SooGame extends JPanel {
         frame.setLocationRelativeTo(null);
         input = new Input();
         frame.addKeyListener(input);
+        frame.addMouseListener(input);
         // first (start())
         start();
         frame.setVisible(true);
