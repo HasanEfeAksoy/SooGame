@@ -315,6 +315,8 @@ public class SooGame extends JPanel {
             this.isFill = isFill;
         }
         Square(Vector position, Vector scale) {
+            this.setPosition(position);
+            this.setScale(scale);
         }
         public boolean getIsFill() {
             return isFill;
