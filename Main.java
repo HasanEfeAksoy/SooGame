@@ -40,6 +40,10 @@ public class Main extends SooGame {
     public void start() {
         super.start();
 
+        frame.setSize(450, 450);
+        frame.setTitle("HELLO SOOGAME!");
+        this.setBackground(Color.CYAN);
+
         // FIRST YOU MUST WRITE HERE FOR DEFINE SOOGAME VARAIBLES
         player = new Player(new SooGame.Vector(50.0f, 50.0f, 0.0f), new SooGame.Vector(30.0f, 30.0f, 1.0f));
 
