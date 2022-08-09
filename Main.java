@@ -10,6 +10,7 @@ class Player extends SooGame.GameObject {
         this.setPosition(pos);
         this.setScale(sca);
         this.addPhysics(new SooGame.Physics());
+        ellipse = new SooGame.Ellipse(new SooGame.Vector(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ()), new SooGame.Vector(this.getScale().getX(), this.getScale().getY(), this.getScale().getZ()));
     }
 
     // GAMEOBJECTS HAVE UPDATE FUNCION
@@ -18,7 +19,8 @@ class Player extends SooGame.GameObject {
     public void update(Graphics2D g2d) {
         super.update(g2d);
 
-        ellipse = new SooGame.Ellipse(new SooGame.Vector(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ()), new SooGame.Vector(this.getScale().getX(), this.getScale().getY(), this.getScale().getZ()));
+        ellipse.setPosition(new SooGame.Vector(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ()));
+        ellipse.setScale(new SooGame.Vector(this.getScale().getX(), this.getScale().getY(), this.getScale().getZ()));
         ellipse.update(g2d);
 
         this.setPosition(new SooGame.Vector(this.getPosition().getX() + 3.0f, this.getPosition().getY(), this.getPosition().getZ()));

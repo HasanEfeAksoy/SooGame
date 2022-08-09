@@ -23,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -90,6 +91,10 @@ public class SooGame extends JPanel {
         follower.setY(follower.getY() + (target.getY() - follower.getY()) / delay);
         follower.setZ(follower.getZ() + (target.getZ() - follower.getZ()) / delay);
         return follower;
+    }
+    public static int random(int low, int high) {
+        Random r = new Random();
+        return r.nextInt(high-low) + low;
     }
 
     public static File file(String path) {
@@ -495,7 +500,6 @@ public class SooGame extends JPanel {
         }
     }
     public static class Physics {
-        private Vector g = new Vector(0.0f, 0.0f, 0.0f);
         private Vector gravity = new Vector(0.0f, 0.1f, 0.0f);
         private Vector velocity = new Vector(0.0f, 0.0f, 0.0f);
         private float mass = 1f;
@@ -525,16 +529,12 @@ public class SooGame extends JPanel {
         }
         private void doPhysics(GameObject gameObject) {
             velocity.add(gravity);
-            velocity.add(g);
             velocity.mult(new Vector(mass, mass, mass));
             velocity.mult(new Vector(0.99f, 0.99f, 0.99f));
             gameObject.position.add(velocity);
-            g = new Vector(0.0f, 0.0f, 0.0f);
         }
         public void addForce(Vector direction) {
-            g.setX(direction.getX());
-            g.setY(direction.getY());
-            g.setZ(direction.getZ());
+            velocity.add(direction);
         }
     }
     public static class Sound {
@@ -594,6 +594,7 @@ public class SooGame extends JPanel {
         frame = new JFrame("Window");
         frame.add(this);
         frame.setSize(400, 400);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         input = new Input();
