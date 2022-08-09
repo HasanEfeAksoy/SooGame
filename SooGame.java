@@ -592,7 +592,6 @@ public class SooGame extends JPanel {
     SooGame() {
         println("\n********** SooGame **********\n*\thttps://github.com/HasanEfeAksoy/SooGame\n*\n*\n*Your Project is starting...\n*..\n*.\n********** SooGame **********");
         frame = new JFrame("Window");
-        frame.add(this);
         frame.setSize(400, 400);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -602,6 +601,7 @@ public class SooGame extends JPanel {
         frame.addMouseListener(input);
         // first (start())
         start();
+        frame.add(this);
         frame.setVisible(true);
 
         while (true) {
