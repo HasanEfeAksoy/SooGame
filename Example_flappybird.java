@@ -8,9 +8,10 @@ class Bird extends SooGame.GameObject {
     Bird(SooGame.Vector pos, SooGame.Vector sca) {
         this.setPosition(pos);
         this.setScale(sca);
-        this.addPhysics(new SooGame.Physics(new SooGame.Vector(0.0f, 0.2f, 0.0f), 1.0f));
+        this.setPhysics(new SooGame.Physics(new SooGame.Vector(0.0f, 0.2f, 0.0f), 1.0f));
         ellipse = new SooGame.Ellipse(this.getPosition(), this.getScale(), Color.YELLOW, true);
     }
+
 
     @Override
     public void update(Graphics2D g2d) {

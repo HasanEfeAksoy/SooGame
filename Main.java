@@ -9,7 +9,7 @@ class Player extends SooGame.GameObject {
     Player(SooGame.Vector pos, SooGame.Vector sca) {
         this.setPosition(pos);
         this.setScale(sca);
-        this.addPhysics(new SooGame.Physics());
+        this.setPhysics(new SooGame.Physics());
         ellipse = new SooGame.Ellipse(new SooGame.Vector(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ()), new SooGame.Vector(this.getScale().getX(), this.getScale().getY(), this.getScale().getZ()));
     }
 
@@ -48,7 +48,7 @@ public class Main extends SooGame {
         player = new Player(new SooGame.Vector(50.0f, 50.0f, 0.0f), new SooGame.Vector(30.0f, 30.0f, 1.0f));
 
         text = new Text("HELLO WORLD", new Vector(50.0f, 50.0f, 0.0f));
-        text.addPhysics(new Physics());
+        text.setPhysics(new Physics());
 
         square = new Square(new Vector(200.0f, 20.0f, 1.0f), new Vector(10.0f, 10.0f, 1.0f), Color.RED, false);
         ellipse = new Ellipse(new Vector(200.0f, 40.0f, 1.0f), new Vector(20.0f, 20.0f, 1.0f), Color.BLUE, true);

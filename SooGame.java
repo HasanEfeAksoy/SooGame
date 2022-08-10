@@ -235,8 +235,7 @@ public class SooGame extends JPanel {
         public Physics getPhysics() {
             return physics;
         }
-
-        public void addPhysics(Physics physics) {
+        public void setPhysics(Physics physics) {
             this.physics = physics;
         }
         public void removePhysics() {
@@ -244,22 +243,20 @@ public class SooGame extends JPanel {
         }
 
         public void update(Graphics2D g2d) {
-            if (this.physics != null) {
-                this.physics.doPhysics(this);
-            }
+             if (this.physics != null) {
+                 this.physics.doPhysics(this);
+             }
         }
     }
 
     public static class Text extends GameObject {
-        private String text = "";
+        private String text = "Text";
         private Font font = new Font("Arial", Font.PLAIN, 10);
         private Color color = Color.BLACK;
-        private boolean isFill = true;
-        Text(String text, Font font, Color color, Vector position, boolean isFill) {
+        Text(String text, Font font, Color color, Vector position) {
             this.text = text;
             this.font = font;
             this.color = color;
-            this.isFill = isFill;
             this.setPosition(position);
         }
         Text(String text, Vector position) {
@@ -284,7 +281,6 @@ public class SooGame extends JPanel {
         public void setColor(Color color) {
             this.color = color;
         }
-
 
         @Override
         public void update(Graphics2D g2d) {
