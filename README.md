@@ -19,4 +19,4 @@ SooGame Basic Java Class Game Engine by Hasan Efe Aksoy.
 <br>
 <br>
 <center><h2>JUST WRITE AND PASS</h2></center>
-under devolopment
+not finished
